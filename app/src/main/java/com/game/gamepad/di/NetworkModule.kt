@@ -3,6 +3,7 @@ package com.game.gamepad.di
 import com.game.gamepad.BuildConfig
 import com.game.gamepad.core.data.util.ApiConstants
 import com.game.gamepad.feature.home.data.api.GamesApi
+import com.game.gamepad.feature.search.data.api.SearchApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,5 +45,16 @@ object NetworkModule {
             .client(client)
             .build()
             .create(GamesApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchApi(client: OkHttpClient): SearchApi {
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+            .create(SearchApi::class.java)
     }
 }

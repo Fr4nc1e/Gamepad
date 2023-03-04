@@ -3,6 +3,9 @@ package com.game.gamepad.di
 import com.game.gamepad.feature.home.domain.repository.GamesRepository
 import com.game.gamepad.feature.home.usecase.GamesUseCases
 import com.game.gamepad.feature.home.usecase.components.GetGamesUseCase
+import com.game.gamepad.feature.search.domain.repository.SearchRepository
+import com.game.gamepad.feature.search.usecase.SearchUseCases
+import com.game.gamepad.feature.search.usecase.components.SearchGameUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,5 +19,11 @@ object UseCaseModule {
     @Singleton
     fun provideGamesUseCases(repository: GamesRepository): GamesUseCases {
         return GamesUseCases(getGames = GetGamesUseCase(repository))
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchUseCases(repository: SearchRepository): SearchUseCases {
+        return SearchUseCases(searchGame = SearchGameUseCase(repository))
     }
 }

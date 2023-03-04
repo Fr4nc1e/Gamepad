@@ -11,7 +11,7 @@ import androidx.navigation.navArgument
 import com.game.gamepad.core.presentation.ui.hub.components.navigation.destinations.Destinations
 import com.game.gamepad.feature.detail.DetailScreen
 import com.game.gamepad.feature.home.presentation.ui.HomeScreen
-import com.game.gamepad.feature.search.SearchScreen
+import com.game.gamepad.feature.search.presentation.ui.SearchScreen
 
 @Composable
 fun NavHub(
