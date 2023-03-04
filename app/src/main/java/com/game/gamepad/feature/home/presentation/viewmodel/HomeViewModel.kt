@@ -6,9 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.game.gamepad.R
 import com.game.gamepad.core.data.paging.PagingManager
 import com.game.gamepad.core.data.util.Resource
+import com.game.gamepad.core.presentation.ui.hub.components.navigation.destinations.Destinations
 import com.game.gamepad.core.util.CoreUiEvent
 import com.game.gamepad.core.util.UiText
 import com.game.gamepad.feature.home.domain.models.Game
+import com.game.gamepad.feature.home.presentation.event.HomeEvent
 import com.game.gamepad.feature.home.usecase.GamesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -39,6 +41,21 @@ class HomeViewModel @Inject constructor(
     val channel = _channel.receiveAsFlow()
 
     private var _page = mutableStateOf(1)
+
+    fun onEvent(event: HomeEvent) {
+        when (event) {
+            HomeEvent.LoadItems -> {
+                loadNextItems()
+            }
+            is HomeEvent.Navigate -> {
+                viewModelScope.launch {
+                    _eventFlow.emit(
+                        CoreUiEvent.Navigate(Destinations.Detail.route + "/${event.route}")
+                    )
+                }
+            }
+        }
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private val pagingManager = PagingManager(
@@ -79,7 +96,7 @@ class HomeViewModel @Inject constructor(
         loadNextItems()
     }
 
-    fun loadNextItems() {
+    private fun loadNextItems() {
         viewModelScope.launch {
             pagingManager.currentPage = _page.value
             pagingManager.loadNextItems()

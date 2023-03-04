@@ -27,6 +27,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.game.gamepad.R
 import com.game.gamepad.core.util.CoreUiEvent
 import com.game.gamepad.core.util.asString
+import com.game.gamepad.feature.home.presentation.event.HomeEvent
 import com.game.gamepad.feature.home.presentation.ui.components.GameCard
 import com.game.gamepad.feature.home.presentation.viewmodel.HomeViewModel
 
@@ -102,7 +103,7 @@ fun HomeScreen(
                             }
                         }
                     },
-                    onClick = { viewModel.loadNextItems() },
+                    onClick = { viewModel.onEvent(HomeEvent.LoadItems) },
                     expanded = !isLoading
                 )
             }
