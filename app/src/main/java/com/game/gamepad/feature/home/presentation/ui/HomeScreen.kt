@@ -77,7 +77,9 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
-                onCardClick = { onNavigate("") }
+                onCardClick = {
+                    game.id?.let { viewModel.onEvent(HomeEvent.Navigate(it.toString())) }
+                }
             )
         }
         if (lazyListState.layoutInfo.visibleItemsInfo.lastOrNull()?.index
