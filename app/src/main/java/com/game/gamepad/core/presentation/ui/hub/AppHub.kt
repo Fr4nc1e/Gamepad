@@ -23,6 +23,7 @@ import com.game.gamepad.core.presentation.ui.hub.viewmodel.AppHubViewModel
 @Composable
 fun AppHub(
     modifier: Modifier,
+    onSplashChange: () -> Unit,
     viewModel: AppHubViewModel = hiltViewModel()
 ) {
     val navHostController = rememberNavController()
@@ -60,7 +61,8 @@ fun AppHub(
         NavHub(
             modifier = Modifier.padding(it),
             navHostController = navHostController,
-            snackbarHostState = snackbarHostState
+            snackbarHostState = snackbarHostState,
+            onSplashChange = onSplashChange
         )
     }
 }

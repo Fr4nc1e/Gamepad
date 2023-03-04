@@ -1,6 +1,5 @@
 package com.game.gamepad.feature.home.presentation.viewmodel
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,10 +12,13 @@ import com.game.gamepad.feature.home.domain.models.Game
 import com.game.gamepad.feature.home.usecase.GamesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -27,17 +29,18 @@ class HomeViewModel @Inject constructor(
     private val _games = MutableStateFlow<List<Game>>(emptyList())
     val games = _games.asStateFlow()
 
-    private val _endReach = MutableStateFlow(false)
-    val endReach = _endReach.asStateFlow()
-
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
     private val _eventFlow = MutableSharedFlow<CoreUiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
+    private val _channel = Channel<Boolean>()
+    val channel = _channel.receiveAsFlow()
+
     private var _page = mutableStateOf(1)
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val pagingManager = PagingManager(
         initialPage = _page.value,
         onLoadUpdated = { loadingState ->
@@ -56,15 +59,17 @@ class HomeViewModel @Inject constructor(
                             )
                         )
                     }
-                    is Resource.Loading -> {}
                     is Resource.Success -> {
                         result.data?.let { list ->
                             _games.update { it + list }
-                            _endReach.update { list.isEmpty() }
                             _page.value++
+                            if (!_channel.isClosedForSend) {
+                                _channel.send(true)
+                                _channel.close()
+                            }
                         }
-                        Log.d("page", "success _page is ${_page.value}")
                     }
+                    else -> {}
                 }
             }
         }

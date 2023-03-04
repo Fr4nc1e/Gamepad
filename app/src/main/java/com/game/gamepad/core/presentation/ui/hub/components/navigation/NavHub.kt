@@ -17,7 +17,8 @@ import com.game.gamepad.feature.search.SearchScreen
 fun NavHub(
     modifier: Modifier,
     snackbarHostState: SnackbarHostState,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    onSplashChange: () -> Unit
 ) {
     NavHost(
         navController = navHostController,
@@ -27,7 +28,8 @@ fun NavHub(
             HomeScreen(
                 modifier = modifier,
                 snackbarHostState = snackbarHostState,
-                onNavigate = navHostController::navigate
+                onNavigate = navHostController::navigate,
+                onSplashChange = onSplashChange
             )
         }
         composable(Destinations.Search.route) {

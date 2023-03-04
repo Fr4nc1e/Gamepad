@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 class PagingManager<Page, Item>(
     private val initialPage: Page,
-    private inline val onLoadUpdated: (Boolean) -> Unit,
+    private inline val onLoadUpdated: suspend (Boolean) -> Unit,
     private inline val onRequest: (nextPage: Page) -> Flow<Resource<List<Item>>>,
     private inline val onSuccess: suspend (items: Flow<Resource<List<Item>>>) -> Unit
 ) : Paging<Page, Item> {
