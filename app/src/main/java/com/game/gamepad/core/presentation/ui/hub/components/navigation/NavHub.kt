@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.game.gamepad.core.presentation.ui.hub.components.navigation.destinations.Destinations
-import com.game.gamepad.feature.detail.DetailScreen
+import com.game.gamepad.feature.detail.presentation.ui.DetailScreen
 import com.game.gamepad.feature.home.presentation.ui.HomeScreen
 import com.game.gamepad.feature.search.presentation.ui.SearchScreen
 
@@ -49,8 +49,7 @@ fun NavHub(
         ) {
             DetailScreen(
                 modifier = modifier,
-                snackbarHostState = snackbarHostState,
-                onNavigate = navHostController::navigate
+                snackbarHostState = snackbarHostState
             )
         }
     }

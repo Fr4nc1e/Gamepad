@@ -1,5 +1,8 @@
 package com.game.gamepad.di
 
+import com.game.gamepad.feature.detail.data.api.DetailApi
+import com.game.gamepad.feature.detail.data.repository.DetailRepositoryImpl
+import com.game.gamepad.feature.detail.domain.repository.DetailRepository
 import com.game.gamepad.feature.home.data.api.GamesApi
 import com.game.gamepad.feature.home.data.repository.GamesRepositoryImpl
 import com.game.gamepad.feature.home.domain.repository.GamesRepository
@@ -25,5 +28,11 @@ object RepositoryModule {
     @Singleton
     fun provideSearchRepository(api: SearchApi): SearchRepository {
         return SearchRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDetailRepository(api: DetailApi): DetailRepository {
+        return DetailRepositoryImpl(api)
     }
 }
