@@ -3,6 +3,8 @@ package com.game.gamepad.di
 import com.game.gamepad.feature.detail.domain.repository.DetailRepository
 import com.game.gamepad.feature.detail.usecase.DetailUseCases
 import com.game.gamepad.feature.detail.usecase.components.GetGameDetailUseCase
+import com.game.gamepad.feature.detail.usecase.components.GetScreenShotsUseCase
+import com.game.gamepad.feature.detail.usecase.components.GetTrailerUseCase
 import com.game.gamepad.feature.home.domain.repository.GamesRepository
 import com.game.gamepad.feature.home.usecase.GamesUseCases
 import com.game.gamepad.feature.home.usecase.components.GetGamesUseCase
@@ -33,6 +35,10 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideDetailUseCases(repository: DetailRepository): DetailUseCases {
-        return DetailUseCases(getGameDetail = GetGameDetailUseCase(repository))
+        return DetailUseCases(
+            getGameDetail = GetGameDetailUseCase(repository),
+            getTrailer = GetTrailerUseCase(repository),
+            getScreenShots = GetScreenShotsUseCase(repository)
+            )
     }
 }
