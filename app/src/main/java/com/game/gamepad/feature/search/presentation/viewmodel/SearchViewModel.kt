@@ -32,18 +32,8 @@ class SearchViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
-    private val _showKeyBoardState = MutableSharedFlow<Boolean>()
-    val showKeyBoardState = _showKeyBoardState.asSharedFlow()
-
-
     private val _eventFlow = MutableSharedFlow<CoreUiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
-
-    init {
-        viewModelScope.launch {
-            _showKeyBoardState.emit(true)
-        }
-    }
 
     fun onEvent(event: SearchEvent) {
         when (event) {
