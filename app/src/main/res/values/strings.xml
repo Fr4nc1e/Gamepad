@@ -5,4 +5,13 @@
     <string name="image">Image</string>
     <string name="fail_to_connect">Fail to connect.</string>
     <string name="load_items">Load items</string>
+    <string name="release_date">Release date:</string>
+    <string name="category">Category:</string>
+    <string name="rating">Rating:</string>
+    <string name="rating_count">Rating count:</string>
+    <string name="rating_top">Rating top:</string>
+    <string name="configuration_requirements">Configuration requirements:</string>
+    <string name="minimum_requirement">Minimum requirement</string>
+    <string name="recommended_requirement">Recommended requirement</string>
+    <string name="reddit">Reddit</string>
 </resources>

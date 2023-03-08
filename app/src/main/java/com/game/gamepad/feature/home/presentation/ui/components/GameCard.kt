@@ -29,9 +29,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.game.gamepad.R
 import com.game.gamepad.core.util.ImageLoader
 import com.game.gamepad.feature.home.domain.models.Game
 
@@ -55,7 +57,8 @@ fun GameCard(
                 url = game.backgroundImage
             )
             Column(
-                modifier = Modifier.padding(10.dp)
+                modifier = Modifier
+                    .padding(10.dp)
                     .animateContentSize(
                         animationSpec = spring(
                             dampingRatio = Spring.DampingRatioMediumBouncy,
@@ -64,7 +67,9 @@ fun GameCard(
                     )
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(5.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(5.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -98,7 +103,9 @@ fun GameCard(
                 }
 
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(5.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(5.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -112,7 +119,9 @@ fun GameCard(
                         )
                     }
 
-                    IconButton(onClick = { isExpanded.value = !isExpanded.value }) {
+                    IconButton(onClick = {
+                        isExpanded.value = !isExpanded.value
+                    }) {
                         Icon(
                             imageVector = when (isExpanded.value) {
                                 true -> Icons.Filled.KeyboardArrowUp
@@ -138,7 +147,7 @@ fun GameCard(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Text(
-                                        text = "Release date:",
+                                        text = stringResource(R.string.release_date),
                                         style = MaterialTheme.typography.bodySmall
                                     )
                                     Text(
@@ -154,7 +163,7 @@ fun GameCard(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Text(
-                                        text = "Category:",
+                                        text = stringResource(R.string.category),
                                         style = MaterialTheme.typography.bodySmall
                                     )
                                     Text(
@@ -170,7 +179,7 @@ fun GameCard(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Text(
-                                        text = "Rating:",
+                                        text = stringResource(R.string.rating),
                                         style = MaterialTheme.typography.bodySmall
                                     )
                                     Text(
@@ -186,7 +195,7 @@ fun GameCard(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Text(
-                                        text = "Rating count:",
+                                        text = stringResource(R.string.rating_count),
                                         style = MaterialTheme.typography.bodySmall
                                     )
                                     Text(
@@ -202,7 +211,7 @@ fun GameCard(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Text(
-                                        text = "Rating top:",
+                                        text = stringResource(R.string.rating_top),
                                         style = MaterialTheme.typography.bodySmall
                                     )
                                     Text(
